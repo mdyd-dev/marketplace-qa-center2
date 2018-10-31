@@ -1,0 +1,265 @@
+---
+slug: /
+layout_name: 1col
+---
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QA Center 2</title>
+    <link rel="stylesheet" href="{{ 'styles/style.css' | asset_url }}">
+  </head>
+  <body>
+    <h1 id="myHeading">Liquid Filters</h1>
+    <p>Test cases</p>
+
+    <p>add_to_array(array, item)</p>
+    <h4 id="myResult">
+        {% assign array = 'a,b,c' | split: ',' %}
+        {{ array | add_to_array: 'd' }}</h4>
+    <div class="line"></div>
+
+    <p>add_to_date(date, number_of_days)</p>
+    <h4 id="myResult">
+        {{ '2010-01-01' | add_to_date: 1 }}</h4>
+    <div class="line"></div>
+
+    <p>any(array = [], query = 'true')</p>
+    <h4 id="myResult">
+        {% assign elements = 'foo,bar' | split: ',' %}
+        {{ elements | any: 'foo' }}</h4>
+    <div class="line"></div>
+
+    <p>asset_url(file_path, **_options)</p>
+    <h4 id="myResult">
+        {{ "valid/file.jpg" | asset_url }} => https://cdn-server.com/valid/file.jpg</h4>
+    <div class="line"></div>
+
+    <p>assign_to_hash_key(hash, key, value)</p>
+    <h4 id="myResult">
+        {% assign accountants = "Angela,Kevin,Oscar" | split: "," %}
+        {% assign management = "David,Jan,Michael" | split: "," %}
+        {% assign company = '{}' | to_hash %}
+        {% assign company = company | assign_to_hash_key: "name", "Dunder Mifflin" %}
+        {% assign company = company | assign_to_hash_key: "accountants", accountants %}
+        {% assign company = company | assign_to_hash_key: "management", management %}
+        {{ company }}</h4>
+    <div class="line"></div>
+
+    <p>compute_hmac(data, secret, algorithm = 'sha256')</p>
+    <h4 id="myResult">
+        {{ 'some_data' | compute_hmac: 'some_secret', 'MD4' }}</h4>
+    <div class="line"></div>
+
+    <p>group_by(objects, method_name)</p>
+    <h4 id="myResult">
+        {{ objects }} =>  [
+        { size: 'xl', color: 'red'},
+        { size: 'xl', color: 'yellow'},
+        { size: 's', color: 'red'}
+        ]
+        {{ objects | group_by: 'size' }}</h4>
+    <div class="line"></div>
+
+    <p>humanize(key)</p>
+    <h4 id="myResult">
+        {{ 'car_model' | humanize }}</h4>
+    <div class="line"></div>
+
+    <p>in_groups_of(array, integer)</p>
+    <h4 id="myResult">
+        {% assign elements = '1,2,3,4' | split: ',' %}
+        {{ elements | in_groups_of: 3 }}</h4>
+    <div class="line"></div>
+
+    <p>intersection(array, other_array)</p>
+    <h4 id="myResult">
+        {% assign array = '1,2,3,4' | split: ',' %}
+        {% assign other_array = '3,4,5,6' | split: ',' %}
+
+        {{ array | intersection: other_array }}</h4>
+    <div class="line"></div>
+
+    <p>is_date_before(first_date, second_date)</p>
+    <h4 id="myResult">
+        {{ '2010-01-02' | date_before: '2010-01-03' }}</h4>
+    <div class="line"></div>
+
+    <p>is_date_in_past(date)</p>
+    <h4 id="myResult">
+        {{ '2010-01-01' | is_date_in_past }}</h4>
+    <div class="line"></div>
+
+    <p>is_included_in_array(array, el)</p>
+    <h4 id="myResult">
+        {% assign elements = 'a,b,c,d' | split: ',' %}
+        {{ elements | is_included_in_array: 'c' }}</h4>
+    <div class="line"></div>
+
+    <p>ilocalize(datetime, format = 'long')</p>
+    <h4 id="myResult">
+        {{ '2010-01-01' | localize }}</h4>
+    <div class="line"></div>
+
+    <p>map(object, method)</p>
+    <h4 id="myResult">
+        {% assign objects = '[{"id":1,"name":"foo","label":"Foo"},{"id":2,"name":"bar","label":"Bar"}]' %}
+        {{ objects | map: 'name' }}</h4>
+    <div class="line"></div>
+
+    <p>markdownify(text)</p>
+    <h4 id="myResult">
+        {{ '# Foo' | markdownify }}</h4>
+    <div class="line"></div>
+
+    <p>matches(text, regexp)</p>
+    <h4 id="myResult">
+        {{ '# Foo' | markdownify }}</h4>
+    <div class="line"></div>
+
+    <p>new_line_to_br</p>
+    <h4 id="myResult">
+        {% capture text %}
+        foo
+        bar
+        {% endcapture %}
+
+        {{ text | new_line_to_br }} - issue</h4>
+    <div class="line"></div>
+
+    <p>number_of_minutes_until</p>
+    <h4 id="myResult">
+        {{ 'today 10am' | to_time: '', 'CET' | number_of_minutes_until }}
+        {{ 'today 8am' | to_time: '', 'CET' | number_of_minutes_until }}</h4>
+    <div class="line"></div>
+
+    <p>pad_left</p>
+    <h4 id="myResult">
+        {{ 'foo' | pad_left: 5 }}
+        {{ 'Y' | pad_left: 3, 'X' }}
+    <div class="line"></div>
+
+    <p>parameterize</p>
+    <h4 id="myResult">
+        {{ 'John arrived_foo' | parameterize }}
+    <div class="line"></div>
+
+    <p>pluralize</p>
+    <h4 id="myResult">
+        {{ 'dog' | pluralize: 1 }}
+        {{ 'dog' | pluralize: 2 }}
+    <div class="line"></div>
+
+    <p>pricify_cents</p>
+    <h4 id="myResult">
+        {{ 1 | pricify_cents }}
+    <div class="line"></div>
+
+    <p>random_string</p>
+    <h4 id="myResult">
+        {{ 10 | random_string }}
+    <div class="line"></div>
+
+    <p>regex_matches</p>
+    <h4 id="myResult">
+        {% assign text = '<html><head><meta property="og:image" content="http://somehost.com/someimage.jpg" /></head><body>content</body></html>' | html_safe %}
+
+        {% assign matches = text | regex_matches: '<meta\s+property="og:image"\s+content="([^"]+)"' %}
+
+        {% if matches.size > 0 %}
+        {% assign image_path = matches[0][0] %}
+        {{ image_path }}
+        {% endif %}
+    <div class="line"></div>
+
+    <p>rotate</p>
+    <h4 id="myResult">
+        {% assign numbers = "1,2,3" | split: "," %}
+        {{ numbers | rotate }}
+    <div class="line"></div>
+
+    <p>sanitize</p>
+    <h4 id="myResult">
+        {% capture link %}
+        <a href="javascript:prompt(1)" target="_blank">Link</a>
+        {% endcapture %}
+        {{ link | sanitize }} => <a href="">Link</a>
+        {% assign whitelist_attributes = 'target' | split: '|' %}
+        {{ link | sanitize: whitelist_attributes }} => <a href="" target="_blank">Link</a>
+    <div class="line"></div>
+
+    <p>sha1</p>
+    <h4 id="myResult">
+        {{ 'foo' | sha1 }}
+    <div class="line"></div>
+
+    <p>slugify</p>
+    <h4 id="myResult">
+        {{ 'John arrived_foo' | slugify }}
+    <div class="line"></div>
+
+    <p>strftime</p>
+    <h4 id="myResult">
+        {{ '2018-05-30T09:12:34.000-07:00' | strftime: '%Y-%m-%d %H:%M' }}
+
+        {% assign time = '2010-01-01 08:00' | to_time_from_str %}
+        {{ time | strftime: "%Y-%m-%d" }}
+    <div class="line"></div>
+
+    <p>subtract_array</p>
+    <h4 id="myResult">
+        {% assign array = '1,2' | split: ',' %}
+        {% assign other_array = '2' | split: ',' %}
+
+        {{ array | subtract_array: other_array }}
+    <div class="line"></div>
+
+    <p>sum_array</p>
+    <h4 id="myResult">
+        {% assign numbers = '1,2,3' | split: ',' %}
+        {{ numbers | sum_array }} - issue should be 6
+    <div class="line"></div>
+
+    <p>titleize</p>
+    <h4 id="myResult">
+        {{ 'foo bar_zoo-xx' | titleize }}
+    <div class="line"></div>
+
+    <p>to_hash</p>
+    <h4 id="myResult">
+        {% assign text = '{ "name": "foo", "bar": {} }' %}
+        {% assign object = text | to_hash %}
+        {{ object.name }} 
+    <div class="line"></div>
+
+    <p>to_mobile_number</p>
+    <h4 id="myResult">
+        {{ '500 123 999' | to_mobile_number: 'PL' }}
+    <div class="line"></div>
+
+    <p>to_positive_integer</p>
+    <h4 id="myResult">
+        {{ '1' | to_positive_integer: 2 }}
+        {{ '' | to_positive_integer: 2 }}
+    <div class="line"></div>
+
+    <p>to_time</p>
+    <h4 id="myResult">
+        {{ 'today' | to_time }}
+        {{ '1 day ago' | to_time }}
+        {{ '5 days from now' | to_time }}
+        {{ '2010:01:01' | to_time: '%Y:%m:%d' }}
+    <div class="line"></div>
+
+    <p>translate</p>
+    <h4 id="myResult">
+        {{ 'beer' | translate }}
+    <div class="line"></div>
+
+    <p>useragent</p>
+    <h4 id="myResult">
+        {{ context.headers.HTTP_USER_AGENT | useragent }}
+    <div class="line"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
