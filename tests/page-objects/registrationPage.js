@@ -1,20 +1,18 @@
-import {
-  Selector
-} from 'testcafe';
+import {Selector} from 'testcafe';
 
 export default class RegistrationPage {
-  constructor() {
+  constructor () {
     this.urlPath = '/sign-up';
+    this.urlCommunity =
+      'https://uipath-community-qa.staging-oregon.near-me.com/sign-up';
     this.input = {
-      firstname: Selector('#form-first-name'),
-      lastname: Selector('#form-last-name'),
-      username: Selector('#form-profiles-attributes-modules-signup-default-attributes-properties-attributes-username'),
-      email: Selector('#form-email'),
-      emailConfirmation: Selector('#form-email-confirmation'),
-      password: Selector('#form-password'),
+      email: Selector ('input[type="email"]'),
+      password: Selector ('input[type="password"]'),
+      firstname: Selector ('input[name="form[first_name]"]'),
+      lastname: Selector ('input[name="form[last_name]"]'),
     };
-    this.checkbox = {
-      agree: Selector('input[type=checkbox]')
+    this.button = {
+      signup: Selector ('#sign-up-submit'),
     };
   }
 }
